@@ -1,0 +1,78 @@
+{% extends "music_app/base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'music_app/css/songplay.css' %}">
+
+<div class="container">
+  <div class="block-left">
+    <img src="{{ check.photo }}" alt="">
+    <div class="left_singer">
+      <h5>Artists</h5>
+      <center>
+        <img src="{{ check.singer.photo }}" alt="">
+        <h6>{{ check.singer.singer_title }}</h6>
+      </center>
+    </div>
+  </div>
+  <div class="block-right">
+    <div class="container">
+      <h1>{{ check.song_title }}</h1>
+      <p>{{ check.movie.movie_title }}<br>Release Date : {{ check.yr_of_rel }}<br>{{ check.mood }} - {{ check.file_type }}<</p>
+      <div>
+        <button class="btn1">Play</button>
+        <button class="btn1">Pause</button>
+        <button class="btn1" onclick="myFunction()">View Lyrics</button>
+        <div id="lyrics">
+          <pre style="margin:10px;color:white;">{{ check.lyrics }}</pre>
+        </div>
+        <a class="inline" data-toggle="modal" data-target="#myModal" title="Add to playlist"><img style="width:30px;height:30px;" src="{% static 'music_app/images/add.png' %}" /></a>
+        <a title="Like" href="{% url 'music_app:playlist' %}"><img style="width:30px;height:30px;" src="{% static 'music_app/images/like.png' %}" /></a>
+        <a title="Add to queue" href="{% url 'music_app:playlist' %}"><img style="width:30px;height:30px;" src="{% static 'music_app/images/queue_add.png' %}" /></a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Available Playlists</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <a href="{% url 'music_app:playlist' %}" class="btn btn-info" style="border-radius:15px;">Create</a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <h4 style="margin-top:10px;color:white;">Related Songs</h4>
+      <table>
+        {% for s in songplay %}
+          <tr>
+            <td rowspan="2"><img src="{{ s.photo }}" alt=""></td>
+            <td>{{ s.song_title }}</td>
+          </tr>
+          <tr>
+            <td class="a">{{ s.album.album_title }} - {{ s.file_type }}</td>
+            <td>
+              <a data-toggle="modal" data-target="#myModal" title="Add to playlist" class="inline1"><img style="width:30px;height:30px;" src="{% static 'music_app/images/add.png' %}" /></a>
+              <a title="Like" href="{% url 'music_app:playlist' %}"><img style="width:30px;height:30px;" src="{% static 'music_app/images/like.png' %}" /></a>
+              <a title="Add to queue" href="{% url 'music_app:playlist' %}"><img style="width:30px;height:30px;" src="{% static 'music_app/images/queue_add.png' %}" /></a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'music_app/js/songplay.js' %}"></script>
+
+{% endblock %}
