@@ -43,4 +43,4 @@ class Songs(models.Model):
 class Playlist(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     playlist_title= models.CharField(max_length=200)
-    add_to_playlist=models.CharField(max_length=10000,default="")
+    add_to_playlist=models.ManyToManyField(Songs,blank=True)

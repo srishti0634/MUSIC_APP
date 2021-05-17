@@ -16,5 +16,5 @@ urlpatterns=[
     url(r'^sad_song/(?P<my_id>\d+)/', views.sad_song, name='sad_song'),
     url(r'^happy_song/(?P<my_id>\d+)/', views.happy_song, name='happy_song'),
     url(r'^playlist/',views.playlist,name='playlist'),
-    # url(r'^create/',views.create,name='create'),
+    # url(r'^newplaylist/',views.newplaylist,name='newplaylist'),
 ]

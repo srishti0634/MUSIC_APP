@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from music_app.models import Album,Songs,Singer,Movie
+from music_app.models import Album,Songs,Singer,Movie,Playlist
 
 # Create your views here.
 
@@ -89,12 +89,23 @@ def happy_song(request,my_id):
 def playlist(request):
     return render(request,"playlist.html",{})
 
-# def create(request,my_id):
-#     if request.method='POST':
+# def newplaylist(request):
+#     if request.method=='POST':
 #         user=request.user
-#         play_id=my_id
-#
-#         playlist=Playlist.object.filter(user=user)
-#
-#         for i in playlist:
-#             if i.id==
+#         name=request.POST['playlist_name']
+#         add_song_id=request.POST['playlist_song_id']
+#         song=Songs.objects.get(id=add_song_id)
+#         print(song)
+#         # p=Playlist(user=user,playlist_title=name)
+#         # p.add_to_playlist.add(song)
+#         # p.save()
+#         # return redirect(f"music_app/{Songs[add_song_id].genre}/{add_song_id}")
+#     return HttpResponse("helllloooo")
+#         # user=request.user
+#         # name=request.POST['playlist_name']
+#         # print(name)
+#         # add_song_id=request.POST['playlist_song_id']
+#         # song=Songs.objects.get(id=add_song_id)
+#         #
+#         # playlist=Playlist.objects.filter(user=user)
+#         # return redirect(f"music_app/{Songs[add_song_id].genre}/{add_song_id}")
